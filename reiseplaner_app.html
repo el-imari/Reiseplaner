@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Gemeinsamer Reiseplaner</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 20px; }
+    h1 { color: #2c3e50; }
+    .tag-section { background: #fff; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    input, textarea, button { width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: #3498db; color: white; border: none; cursor: pointer; }
+    button:hover { background: #2980b9; }
+    .plan-display { margin-top: 20px; }
+    .entry { background: #ecf0f1; padding: 10px; margin-bottom: 10px; border-left: 4px solid #3498db; }
+  </style>
+</head>
+<body>
+  <h1>🌍 Gemeinsamer Reiseplaner</h1>
+
+  <div class="tag-section">
+    <label for="tag">🗓️ Reisetag (z. B. Tag 1):</label>
+    <input id="tag" placeholder="z. B. Tag 1">
+
+    <label for="ziel">📍 Ziel/Ort:</label>
+    <input id="ziel" placeholder="z. B. Bled, Slowenien">
+
+    <label for="aktivitaet">🎯 Aktivität(en):</label>
+    <textarea id="aktivitaet" placeholder="z. B. Wandern zu Ojstrica + Link"></textarea>
+
+    <label for="essen">🍽️ Essen / Restaurant:</label>
+    <textarea id="essen" placeholder="z. B. Pizza-Restaurant in der Nähe"></textarea>
+
+    <label for="unterkunft">🛏️ Unterkunft:</label>
+    <textarea id="unterkunft" placeholder="z. B. Airbnb-Link"></textarea>
+
+    <button onclick="addToPlan()">➕ Vorschlag hinzufügen</button>
+  </div>
+
+  <div class="plan-display" id="plan"></div>
+
+  <script>
+    function addToPlan() {
+      const tag = document.getElementById("tag").value.trim();
+      const ziel = document.getElementById("ziel").value.trim();
+      const aktivitaet = document.getElementById("aktivitaet").value.trim();
+      const essen = document.getElementById("essen").value.trim();
+      const unterkunft = document.getElementById("unterkunft").value.trim();
+
+      if (!tag || !ziel) return alert("Bitte mindestens Tag und Ziel eingeben.");
+
+      const planDiv = document.getElementById("plan");
+      const html = `
+        <div class='entry'>
+          <strong>${tag}</strong><br>
+          <b>Ziel:</b> ${ziel}<br>
+          <b>Aktivität:</b> ${aktivitaet}<br>
+          <b>Essen:</b> ${essen}<br>
+          <b>Unterkunft:</b> ${unterkunft}
+        </div>
+      `;
+      planDiv.innerHTML += html;
+
+      // Felder leeren
+      document.getElementById("tag").value = "";
+      document.getElementById("ziel").value = "";
+      document.getElementById("aktivitaet").value = "";
+      document.getElementById("essen").value = "";
+      document.getElementById("unterkunft").value = "";
+    }
+  </script>
+</body>
+</html>
